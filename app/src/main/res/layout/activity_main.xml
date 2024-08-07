@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/aviator_blue_light">
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/processPaymentButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Procesar Pago"
+            app:layout_constraintTop_toBottomOf="@id/checkInventoryButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="4dp"
+            app:icon="@drawable/ic_payment"
+            app:iconTint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/aviator_blue_primary"
+            style="@style/CustomButton"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/placeOrderButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Colocar Orden"
+            app:layout_constraintTop_toBottomOf="@id/statusCard"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="60dp"
+            app:icon="@drawable/ic_shopping_cart"
+            app:iconTint="@color/white"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/aviator_blue_primary"
+            style="@style/CustomButton"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+    <com.google.android.material.button.MaterialButton
+            android:id="@+id/checkInventoryButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Verificar Inventario"
+            app:layout_constraintTop_toBottomOf="@id/placeOrderButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="12dp"
+            app:icon="@drawable/ic_inventory"
+            app:iconTint="@color/aviator_blue_primary"
+            android:textColor="@color/aviator_blue_primary"
+            style="@style/OutlinedButton"
+            app:strokeColor="@color/aviator_blue_primary"
+            app:layout_constraintHorizontal_bias="0.0"/>
+
+    <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="invisible"
+            android:indeterminate="true"
+            app:indicatorColor="@color/aviator_blue_primary"
+            app:layout_constraintHorizontal_bias="0.501"
+            app:layout_constraintVertical_bias="0.801"/>
+
+    <com.google.android.material.card.MaterialCardView
+            android:id="@+id/statusCard"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardElevation="2dp"
+            app:cardCornerRadius="16dp"
+            app:cardBackgroundColor="@color/aviator_blue_secondary"
+            style="?attr/materialCardViewFilledStyle"
+            android:layout_marginTop="188dp">
+
+        <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Estado"
+                    android:textColor="@color/white"
+                    android:textAppearance="?attr/textAppearanceTitleMedium"/>
+
+            <TextView
+                    android:id="@+id/orderStatusTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estado de la orden"
+                    android:textColor="@color/white"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:layout_marginTop="8dp"/>
+
+            <TextView
+                    android:id="@+id/inventoryTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Estado del inventario"
+                    android:textColor="@color/white"
+                    android:textAppearance="?attr/textAppearanceBodyMedium"
+                    android:layout_marginTop="8dp"/>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <TextView
+            android:text="SISTEMA DE ORDENES"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:id="@+id/textView"
+            android:textSize="24sp"
+            android:textColor="@color/aviator_blue_dark"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
+            app:layout_constraintVertical_bias="0.099"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

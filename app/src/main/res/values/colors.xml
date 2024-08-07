@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="aviator_blue_primary">#1E3D58</color>
+    <color name="aviator_blue_secondary">#2C5F7C</color>
+    <color name="aviator_blue_light">#8EB8E5</color>
+    <color name="aviator_blue_dark">#0F1C2B</color>
+    <color name="white">#FFFFFF</color>
+</resources>
