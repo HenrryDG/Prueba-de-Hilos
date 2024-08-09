@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
@@ -12,7 +11,7 @@
             android:id="@+id/processPaymentButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Procesar Pago"
+            android:text="@string/procesar_pago"
             app:layout_constraintTop_toBottomOf="@id/checkInventoryButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +27,7 @@
             android:id="@+id/placeOrderButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Colocar Orden"
+            android:text="@string/colocar_orden"
             app:layout_constraintTop_toBottomOf="@id/statusCard"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +43,7 @@
             android:id="@+id/checkInventoryButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Verificar Inventario"
+            android:text="@string/verificar_inventario"
             app:layout_constraintTop_toBottomOf="@id/placeOrderButton"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -90,7 +89,7 @@
             <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Estado"
+                    android:text="@string/estado"
                     android:textColor="@color/white"
                     android:textAppearance="?attr/textAppearanceTitleMedium"/>
 
@@ -98,7 +97,7 @@
                     android:id="@+id/orderStatusTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Estado de la orden"
+                    android:text="@string/estado_de_la_orden"
                     android:textColor="@color/white"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:layout_marginTop="8dp"/>
@@ -107,7 +106,7 @@
                     android:id="@+id/inventoryTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Estado del inventario"
+                    android:text="@string/estado_del_inventario"
                     android:textColor="@color/white"
                     android:textAppearance="?attr/textAppearanceBodyMedium"
                     android:layout_marginTop="8dp"/>
@@ -115,7 +114,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <TextView
-            android:text="SISTEMA DE ORDENES"
+            android:text="@string/sistema_de_ordenes"
             android:layout_width="250dp"
             android:layout_height="35dp"
             android:id="@+id/textView"
@@ -127,5 +126,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintVertical_bias="0.099"/>
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

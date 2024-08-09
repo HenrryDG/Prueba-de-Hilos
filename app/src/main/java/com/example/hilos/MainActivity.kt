@@ -1,14 +1,17 @@
 package com.example.hilos
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Button
 import android.widget.TextView
 import android.widget.ProgressBar
 import android.widget.Toast
-import kotlinx.coroutines.*
-import kotlin.concurrent.thread
 import kotlin.random.Random
+
+@SuppressLint("SetTextI18n") // Para evitar advertencias de internacionalización
 
 class MainActivity : AppCompatActivity() {
     private lateinit var orderStatusTextView: TextView
@@ -18,9 +21,17 @@ class MainActivity : AppCompatActivity() {
     private lateinit var processPaymentButton: Button
     private lateinit var progressBar: ProgressBar
 
-    private val coroutineScope = CoroutineScope(Dispatchers.Main + Job()) // El Distpatcher.Main nos permite ejecutar la corrutina en el hilo principal
     private var orderPlaced: Boolean = false
     private var inventoryCount: Int = 50
+
+    private val handler = Handler(Looper.getMainLooper()) { message ->
+        when (message.what) {
+            1 -> showNotification("Pago exitoso")  // Para pago exitoso
+            2 -> showNotification("Pago fallido")  // Para pago fallido
+        }
+        true
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +52,7 @@ class MainActivity : AppCompatActivity() {
     private fun placeOrder() {
         if (inventoryCount > 0) {
             Thread {
-                runOnUiThread {
+                runOnUiThread { // runOnUiThread nos permite ejecutar código en el hilo principal
                     orderStatusTextView.text = "Colocando orden..."
                     progressBar.visibility = ProgressBar.VISIBLE
                 }
@@ -50,10 +61,6 @@ class MainActivity : AppCompatActivity() {
                 Thread.sleep(3000) // Simula un proceso que toma 3 segundos
                 val random = Random.nextInt(1000, 9999)
                 val orderResult = "Orden #$random colocada exitosamente"
-
-                // Actualizamos el inventario después de colocar la orden
-                inventoryCount--
-                updateInventory()
 
                 runOnUiThread {
                     orderPlaced = true
@@ -67,20 +74,23 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkInventory() {
-        coroutineScope.launch {
-            inventoryTextView.text = "Verificando inventario..."
-            progressBar.visibility = ProgressBar.VISIBLE
-
-            // Simulamos la verificación de inventario en segundo plano
-            val inventoryStatus = withContext(Dispatchers.Default) {
-                delay(2000) // Simula un proceso que toma 2 segundos
-                "Productos disponibles: $inventoryCount"
+        Thread {
+            runOnUiThread {
+                inventoryTextView.text = "Verificando inventario..."
+                progressBar.visibility = ProgressBar.VISIBLE
             }
 
-            inventoryTextView.text = inventoryStatus
-            progressBar.visibility = ProgressBar.INVISIBLE
-        }
+            // Simulamos la verificación del inventario en segundo plano
+            Thread.sleep(2000) // Simula un proceso que toma 2 segundos
+            val inventoryStatus = "Productos disponibles: $inventoryCount"
+
+            runOnUiThread {
+                inventoryTextView.text = inventoryStatus
+                progressBar.visibility = ProgressBar.INVISIBLE
+            }
+        }.start()
     }
+
 
     private fun processPayment() {
         if (!orderPlaced) {
@@ -95,11 +105,26 @@ class MainActivity : AppCompatActivity() {
 
                 // Simulamos el procesamiento de pago en segundo plano
                 Thread.sleep(4000) // Simula un proceso que toma 4 segundos
-                val paymentResult = if (Random.nextBoolean()) "Pago procesado exitosamente" else "Error en el procesamiento del pago"
+                val paymentSuccess = Random.nextBoolean()
+                val paymentResult = if (paymentSuccess){
+                    "Pago exitoso"
+                } else {
+                    "Pago fallido por favor intente de nuevo"
+                }
+
+                if(paymentSuccess){
+                    updateInventory()
+                    handler.sendEmptyMessage(1)
+
+                }
+                else{
+                    handler.sendEmptyMessage(2)
+                }
+
+                orderPlaced = false
 
                 runOnUiThread {
                     orderStatusTextView.text = paymentResult
-                    orderPlaced = false
                     progressBar.visibility = ProgressBar.INVISIBLE
                 }
 
@@ -121,6 +146,7 @@ class MainActivity : AppCompatActivity() {
                 progressBar.visibility = ProgressBar.VISIBLE
             }
 
+            inventoryCount--
             Thread.sleep(2000) // Simula un proceso que toma 2 segundos
             val inventoryStatus = "Productos disponibles: $inventoryCount"
 
@@ -131,8 +157,7 @@ class MainActivity : AppCompatActivity() {
         }.start()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        coroutineScope.cancel() // Cancelamos todas las corrutinas al destruir la actividad
+    private fun showNotification(message: String) {
+        Toast.makeText(this@MainActivity, message, Toast.LENGTH_LONG).show()
     }
 }

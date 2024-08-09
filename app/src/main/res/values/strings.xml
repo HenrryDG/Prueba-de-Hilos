@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Hilos</string>
+    <string name="procesar_pago">Procesar Pago</string>
+    <string name="check_inventory">Verificar Inventario</string>
+    <string name="place_order">Colocar Producto</string>
+    <string name="colocar_orden">Colocar Orden</string>
+    <string name="verificar_inventario">Verificar Inventario</string>
+    <string name="estado">Estado</string>
+    <string name="estado_de_la_orden">Estado de la orden</string>
+    <string name="estado_del_inventario">Estado del inventario</string>
+    <string name="sistema_de_ordenes">SISTEMA DE ORDENES</string>
+
 </resources>
